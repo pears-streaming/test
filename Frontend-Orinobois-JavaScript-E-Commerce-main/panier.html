@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Orinobois</title>
+  </head>
+  <body>
+    <section class="flex-around">
+      <i class="vert fab fa-envira fa-5x"></i>
+      <h1 class="logo-titre">
+        Brocantier <br />
+        Meuble Oribois
+      </h1>
+      <a id="charriot" href="panier.html" class="flex-column-between">
+        <i class="vert fas fa-cart-arrow-down fa-2x"></i>
+        <span id="spanQuantite"></span>
+        <p class="rouge">Mon Panier</p>
+      </a>
+    </section>
+    <nav>
+      <div class="flex-around">
+        <a href="index.html">MEUBLE</a>
+        <a href="commande.html">COMMANDE</a>
+        <a href="panier.html">CONTACT</a>
+        <a href="panier.html">PANIER</a>
+      </div>
+    </nav>
+
+    <section id="basket" class="flex-column-centre">
+      <!-- titre panier -->
+      <div id="blocTitrePanier" class="flex-start size80">
+        <h2 id="titre-panier">
+          VEUILLEZ AJOUTER DES PRODUITS AU PANIER <br />
+          PAS DE PRODUIT
+        </h2>
+      </div>
+      <!-- fiche complete carte + recapitulatif panier -->
+      <div id="basket-fiche" class="flex-around">
+        <!-- carte panier -->
+        <div id="injectJs">
+          <div id="basketProduit" class="flex-around">
+            <div id="blocImage">
+              <img src="IMG/LaurelBranch6.svg" alt="image feuille" />
+            </div>
+            <div id="blocProduit" class="flex-column-around">
+              <h2>Produit</h2>
+              <p>vernis</p>
+              <p>0 E</p>
+              <p>Ref:0000000000</p>
+              <p><i class="fas fa-truck"></i> en stock</p>
+            </div>
+            <div id="bloc-change-produit" class="flex-around">
+              <div class="flex-centre">
+                <button class="bouton-moins">-</button>
+                <span class="produit-quantite">0</span>
+                <button class="bouton-plus">+</button>
+              </div>
+              <div><p>0 E</p></div>
+              <div><i class="fas fa-trash-alt rouge"></i></div>
+            </div>
+          </div>
+        </div>
+        <!-- recapitulatif panier -->
+        <div id="basket-recap">
+          <h2 class="titre-recap rouge">Récapitulatif</h2>
+          <div class="flex-around">
+            <p id="nbArticle">0 article</p>
+            <p id="prixArticle">0</p>
+          </div>
+          <div class="flex-around">
+            <p>Livraison</p>
+            <p id="prixLivraison">offert</p>
+          </div>
+          <div class="trait-design"></div>
+          <div class="flex-around">
+            <h3>Total TTC</h3>
+            <p id="prixTtc">0</p>
+          </div>
+          <div>
+            <a id="continueCommande" class="flex-around" href="#ancreForm">
+              CONTINUER <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+          <div>
+            <p><i class="fas fa-truck vert"></i> Livraison sous 3 semaines</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-start size80">
+        <a class="continuer" href="index.html">
+          <i class="fas fa-chevron-left"></i> CONTINUER MES ACHATS
+        </a>
+      </div>
+      <div id="ancreForm">
+        <form id="formulaireContact" action="post">
+          <h2 class="flex-centre">Informations Personnelles</h2>
+          <div class="nom-prenom flex-centre">
+            <div class="flex-column-start">
+              <label for="prenom" class="flex-start">Prénom</label>
+              <input class="champ" id="prenom" type="text" />
+              <span id="errorPrenom"></span>
+            </div>
+            <div class="flex-column-start">
+              <label for="nom" class="flex-start">Nom</label>
+              <input class="champ" id="nom" type="text" />
+              <span id="errorNom"></span>
+            </div>
+          </div>
+          <div class="flex-column-centre">
+            <div class="flex-column-start">
+              <label for="adresse" class="flex-start">Adresse</label>
+              <input class="champ" id="adresse" type="text" />
+              <span id="errorAdresse"></span>
+            </div>
+            <div class="flex-column-start">
+              <label for="ville" class="flex-start">Ville</label>
+              <input class="champ" id="ville" type="text" />
+              <span id="errorVille"></span>
+            </div>
+            <div class="flex-column-start">
+              <label for="email" class="flex-start">Email</label>
+              <input class="champ" id="email" type="mail" />
+              <span id="errorEmail"></span>
+            </div>
+            <button class="bouton-commande" type="submit">Commander</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <section class="flex-column-centre">
+        <div class="flex-centre">
+          <h2 class="titre-reseau">
+            La communauté <br />
+            Meuble Oribois
+          </h2>
+        </div>
+        <div class="logos-reseau flex-around">
+          <a href="#"><i class="foot-logo fab fa-facebook-square fa-4x"></i></a>
+          <a href="#"
+            ><i class="foot-logo fab fa-pinterest-square fa-4x"></i
+          ></a>
+          <a href="#"
+            ><i class="foot-logo fab fa-instagram-square fa-4x"></i
+          ></a>
+        </div>
+      </section>
+      <section class="flex-around">
+        <div class="bloc-footer">
+          <h2>Informations</h2>
+          <div class="lien-footer">
+            <a href="#">Nos services</a>
+            <a href="#">Nos valeurs</a>
+            <a href="#">Notre histoire</a>
+            <a href="#">CGV</a>
+            <a href="#">Questions fréquentes</a>
+            <a href="#">Meuble Oribois arbre</a>
+          </div>
+        </div>
+        <div class="bloc-footer">
+          <h2>Nos services</h2>
+          <div class="lien-footer">
+            <a href="#">Paiement</a>
+            <a href="#">Suivi de commande</a>
+            <a href="#">Livraison</a>
+            <a href="#">Conseils</a>
+            <a href="#">Retours</a>
+            <a href="#">Nous contacter</a>
+          </div>
+        </div>
+        <div class="bloc-footer">
+          <h2>Catégories</h2>
+          <div class="lien-footer">
+            <a href="#">Accueil</a>
+            <a href="#">Commandes</a>
+            <a href="#">Panier</a>
+            <a href="#">Formulaires</a>
+          </div>
+        </div>
+        <div class="bloc-footer">
+          <h2>Nos magasins</h2>
+          <div class="lien-footer">
+            <a href="#">Paris</a>
+            <a href="#">Bordeaux</a>
+            <a href="#">Lyon</a>
+            <a href="#">Nancy</a>
+          </div>
+        </div>
+      </section>
+      <section class="flex-around">
+        <div class="gris">
+          <p>Brocantier Meuble Oribois - 2030 - Tous droits réserver</p>
+          <p>Mentions légales - Plan du site - Crédits</p>
+        </div>
+        <div class="flex-around">
+          <p class="gris">Paiement sécurisé</p>
+          <img
+            class="logos-paiement"
+            src="IMG/cb.png"
+            alt="photo logo paiement"
+          />
+        </div>
+      </section>
+    </footer>
+    <script src="panier.js"></script>
+  </body>
+</html>
