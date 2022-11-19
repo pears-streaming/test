@@ -1,1 +1,1 @@
-alert('Hi!');
+documment.write("Hello World !");
