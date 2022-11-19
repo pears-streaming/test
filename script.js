@@ -1,1 +1,3 @@
-documment.write("Hello World !");
+var age = 14;
+
+document.write(age);
