@@ -1,4 +1,3 @@
-    <?php
 <!-- FOOTER -->
     <footer>
       <p>&copy 2022 Pears Streaming</p>
