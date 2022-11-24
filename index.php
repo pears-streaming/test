@@ -1,3 +1,4 @@
+<? php
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,3 +100,4 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
 <?php require "footer.php";?>
 </body>
 </html>
+?>
