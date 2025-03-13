@@ -1,32 +1,28 @@
-from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
 import logging
 import os
+from telegram import Update
+from telegram.ext import Application, CommandHandler, CallbackContext
 
 # Configure logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Get bot token from Railway environment variables
-import os
+# Récupérer le Token depuis Railway
 TOKEN = os.getenv("BOT_TOKEN")
 
-def start(update: Update, context):
-    update.message.reply_text("Bienvenue sur votre bot de suivi des whales et des memes coins !")
+# Fonction de démarrage
+async def start(update: Update, context: CallbackContext):
+    await update.message.reply_text("Bienvenue sur votre bot de suivi des whales et des memes coins ! 🚀")
 
 def main():
-    from telegram.ext import Updater
-    from telegram.ext import CommandHandler
-    
-    updater = Updater(TOKEN, use_context=True)
-    dp = updater.dispatcher
-    
-    # Command handler
-    dp.add_handler(CommandHandler("start", start))
-    
-    # Start the bot
-    updater.start_polling()
-    updater.idle()
+    # Initialisation du bot avec la nouvelle méthode
+    application = Application.builder().token(TOKEN).build()
 
-if __name__ == '__main__':
+    # Ajouter la commande /start
+    application.add_handler(CommandHandler("start", start))
+
+    # Lancer le bot
+    application.run_polling()
+
+if __name__ == "__main__":
     main()
