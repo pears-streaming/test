@@ -109,6 +109,6 @@ application = Application.builder().token(TELEGRAM_TOKEN).build()
 
 # Empêcher les conflits de polling
 application.run_polling(allowed_updates=Update.ALL_TYPES)
-    application.run_polling()
+application.run_polling()
 if __name__ == "__main__":
     main()
