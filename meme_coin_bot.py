@@ -109,6 +109,11 @@ application = Application.builder().token(TELEGRAM_TOKEN).build()
 
 # Empêcher les conflits de polling
 application.run_polling(allowed_updates=Update.ALL_TYPES)
-application.run_polling()
+application.run_webhook(
+    listen="0.0.0.0",
+    port=PORT,
+    url_path=TOKEN,
+    webhook_url=f"https://{respectful-fascination-a.up.railway.app}/{TELEGRAM_TOKEN}"
+)
 if __name__ == "__main__":
     main()
