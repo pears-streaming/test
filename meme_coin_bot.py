@@ -99,6 +99,5 @@ def main():
     
     # Lancer le bot
     application.run_polling()
-bot.send_message(chat_id=BOT_CHAT_ID, text="🚀 Test message depuis le bot !")
 if __name__ == "__main__":
     main()
