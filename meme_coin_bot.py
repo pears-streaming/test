@@ -1,5 +1,6 @@
 import requests
 import telegram
+import logging
 from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, CallbackContext, JobQueue
 from telegram.ext import Application, MessageHandler, filters
@@ -98,7 +99,16 @@ def main():
     application.add_handler(CommandHandler("copytrade", copytrade))
     
     # Lancer le bot
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+
+# Assurez-vous que vous utilisez bien Application et pas 'application'
+application = Application.builder().token(TELEGRAM_TOKEN).build()
+
+# Empêcher les conflits de polling
+application.run_polling(allowed_updates=Update.ALL_TYPES)
     application.run_polling()
 if __name__ == "__main__":
     main()
