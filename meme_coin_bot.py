@@ -2,6 +2,7 @@ import requests
 import telegram
 from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, CallbackContext, JobQueue
+from telegram.ext import MessageHandler, filters
 
 # Configurations
 TELEGRAM_TOKEN = "8078244294:AAEFUP2w4CEkyGMGZLOvtnYusLm7mmt-LNU"
@@ -57,7 +58,7 @@ async def meme(update: Update, context: CallbackContext):
         message += f"💰 Token: {coin['hash']}\n🔗 Adresse: {coin['to']}\n\n"
     
     await update.message.reply_text(message)
-
+    
 # Commande /alerts pour activer les notifications
 async def alerts(update: Update, context: CallbackContext):
     context.job_queue.run_repeating(alert_new_coins, interval=300, first=5)
@@ -66,7 +67,11 @@ async def alerts(update: Update, context: CallbackContext):
 # Commande /copytrade pour activer la copie des transactions des whales
 async def copytrade(update: Update, context: CallbackContext):
     await update.message.reply_text("🤖 Copie automatique des transactions des whales activée !")
+#lit les msg
+def handle_channel_messages(update: Update, context: CallbackContext):
+    update.message.reply_text("Message reçu dans le channel ! 🚀")
 
+application.add_handler(MessageHandler(filters.Chat(BOT_CHAT_ID), handle_channel_messages))
 # Fonction principale
 def main():
     application = Application.builder().token(TELEGRAM_TOKEN).build()
