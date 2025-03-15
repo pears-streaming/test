@@ -25,26 +25,25 @@ def is_meme_coin(transaction):
     # Analyse basique (à améliorer avec des critères plus précis)
     return True
 
-async def alert_new_coins(context: CallbackContext):
-    new_coins = await get_new_meme_coins()
-    
+def alert_new_coins(context: CallbackContext):
+    new_coins = get_new_meme_coins()
     if not new_coins:
-        return  # Aucun coin trouvé
+        return
     
     for coin in new_coins:
-        message = (
-            f"🚀 **Nouveau Meme Coin détecté !**\n\n"
-            f"💰 **Token:** {coin['hash']}\n"
-            f"📈 **Volume:** ...\n"
-            f"🔗 **Adresse:** {coin['to']}\n"
-        )
-        await context.bot.send_message(chat_id=BOT_CHAT_ID, text=message, parse_mode="Markdown")
+        message = f"🚀 Nouveau Meme Coin détecté !\n\n💰 Token: {coin['hash']}\n📈 Volume: ...\n🔗 Adresse: {coin['to']}\n"
+        context.bot.send_message(chat_id=BOT_CHAT_ID, text=message)
 
 # Fonction de démarrage
 async def start(update: Update, context: CallbackContext):
     await update.message.reply_text("Bienvenue sur le bot de suivi des whales et des memes coins ! 🚀")
 
 def main():
+    application = Application.builder().token(TELEGRAM_TOKEN).build()
+
+# Active le JobQueue
+    job_queue = application.job_queue
+    job_queue.run_repeating(alert_new_coins, interval=300, first=5)
     # Initialisation du bot avec la bonne méthode
     application = Application.builder().token(TELEGRAM_TOKEN).build()
 
@@ -56,6 +55,7 @@ def main():
 
     # Lancer le bot
     application.run_polling()
+    
 
 if __name__ == "__main__":
     main()
