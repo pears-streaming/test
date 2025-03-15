@@ -1,6 +1,7 @@
 import requests
 import telegram
 import logging
+import os
 from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, CallbackContext, JobQueue
 from telegram.ext import Application, MessageHandler, filters
@@ -9,6 +10,8 @@ from telegram.ext import Application, MessageHandler, filters
 TELEGRAM_TOKEN = "8078244294:AAEFUP2w4CEkyGMGZLOvtnYusLm7mmt-LNU"
 ETHERSCAN_API_KEY = "WB3K1TJN84NQFNM7J657VNZQ9JV8INNKN4"
 BOT_CHAT_ID = "-1002670843813"  # Remplace par l'ID numérique du channel
+RAILWAY_URL = os.getenv("respectful-fascination-a.up.railway.app")
+PORT = int(os.getenv("PORT", 8443))
 
 # Initialisation du bot
 bot = Bot(token=TELEGRAM_TOKEN)
@@ -104,6 +107,23 @@ def main():
     level=logging.INFO
 )
 
+# Initialisation du bot avec Telegram Token
+application = Application.builder().token(TELEGRAM_TOKEN).build()
+
+# Suppression de l'ancien webhook pour éviter les conflits
+async def remove_webhook():
+    await application.bot.delete_webhook()
+
+# Configuration du webhook
+async def set_webhook():
+    await application.bot.set_webhook(url=f"{RAILWAY_URL}/{TELEGRAM_TOKEN}")
+
+async def main():
+    await remove_webhook()  # Nettoyage
+    await set_webhook()  # Mise en place du Webhook
+
+import asyncio
+asyncio.run(main())
 # Assurez-vous que vous utilisez bien Application et pas 'application'
 application = Application.builder().token(TELEGRAM_TOKEN).build()
 
