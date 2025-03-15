@@ -35,7 +35,22 @@ def alert_new_coins(update: Update, context: CallbackContext):
     for coin in new_coins:
         message = f"🚀 Nouveau Meme Coin détecté !\n\n💰 Token: {coin['hash']}\n📈 Volume: ...\n🔗 Adresse: {coin['to']}\n"
         context.bot.send_message(chat_id=BOT_CHAT_ID, text=message)
+# Fonction de démarrage
+async def start(update: Update, context: CallbackContext):
+    await update.message.reply_text("Bienvenue sur votre bot de suivi des whales et des memes coins ! 🚀")
 
+def main():
+    # Initialisation du bot avec la nouvelle méthode
+    application = Application.builder().token(TELEGRAM_TOKEN).build()
+
+    # Ajouter la commande /start
+    application.add_handler(CommandHandler("start", start))
+
+    # Lancer le bot
+    application.run_polling()
+
+if __name__ == "__main__":
+    main()
 # Lancement du bot
 application = Application.builder().token(TELEGRAM_TOKEN).build()
 application.add_handler(CommandHandler("start", alert_new_coins))
