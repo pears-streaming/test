@@ -16,12 +16,14 @@ application = Application.builder().token(TELEGRAM_TOKEN).build()
 def get_new_meme_coins():
     url = f"https://api.etherscan.io/api?module=account&action=txlist&address=0x...&apikey={ETHERSCAN_API_KEY}"
     response = requests.get(url).json()
-    
+
+    print("🔍 API Response:", response)  # <-- Ajoute cette ligne
+
     meme_coins = []
     for tx in response["result"]:
         if is_meme_coin(tx):
             meme_coins.append(tx)
-    
+
     return meme_coins
 
 # Vérification si c'est un meme coin
@@ -78,6 +80,15 @@ application.add_handler(MessageHandler(filters.Chat(BOT_CHAT_ID), handle_channel
 # Fonction principale
 def main():
     application = Application.builder().token(TELEGRAM_TOKEN).build()
+
+    # Vérifier si le JobQueue existe
+    if not application.job_queue:
+        print("❌ JobQueue non initialisé !")
+        return
+
+    print("✅ JobQueue en cours d'exécution...")  # <-- Ajoute ça
+    application.job_queue.run_repeating(alert_new_coins, interval=300, first=5)
+
     
     # Ajout des commandes
     application.add_handler(CommandHandler("start", start))
@@ -88,6 +99,6 @@ def main():
     
     # Lancer le bot
     application.run_polling()
-
+bot.send_message(chat_id=BOT_CHAT_ID, text="🚀 Test message depuis le bot !")
 if __name__ == "__main__":
     main()
