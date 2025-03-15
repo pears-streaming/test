@@ -119,8 +119,10 @@ async def set_webhook():
     await application.bot.set_webhook(url=f"{RAILWAY_URL}/{TELEGRAM_TOKEN}")
 
 async def main():
-    await remove_webhook()  # Nettoyage
-    await set_webhook()  # Mise en place du Webhook
+    webhook_info = await application.bot.get_webhook_info()
+    if webhook_info.url != f"{RAILWAY_URL}/{TELEGRAM_TOKEN}":
+        await application.bot.delete_webhook()
+        await application.bot.set_webhook(url=f"{RAILWAY_URL}/{TELEGRAM_TOKEN}")
 
 import asyncio
 asyncio.run(main())
