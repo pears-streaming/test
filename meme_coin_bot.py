@@ -3,9 +3,9 @@ from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, CallbackContext
 
 # Configurations
-TELEGRAM_TOKEN = "TON_TOKEN_ICI"
-ETHERSCAN_API_KEY = "TA_CLE_ETHERSCAN_ICI"
-BOT_CHAT_ID = "-100XXXXXXXXXX"  # Remplace par l'ID numérique du channel
+TELEGRAM_TOKEN = "8078244294:AAEFUP2w4CEkyGMGZLOvtnYusLm7mmt-LNU"
+ETHERSCAN_API_KEY = "WB3K1TJN84NQFNM7J657VNZQ9JV8INNKN4"
+BOT_CHAT_ID = "https://t.me/+guutfQoXJItkYWVk"  # Remplace par l'ID numérique du channel
 
 # Initialisation du bot
 bot = Bot(token=TELEGRAM_TOKEN)
