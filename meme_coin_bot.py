@@ -2,7 +2,7 @@ import requests
 import telegram
 from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, CallbackContext, JobQueue
-from telegram.ext import MessageHandler, filters
+from telegram.ext import Application, MessageHandler, filters
 
 # Configurations
 TELEGRAM_TOKEN = "8078244294:AAEFUP2w4CEkyGMGZLOvtnYusLm7mmt-LNU"
@@ -11,7 +11,7 @@ BOT_CHAT_ID = "-1002670843813"  # Remplace par l'ID numérique du channel
 
 # Initialisation du bot
 bot = Bot(token=TELEGRAM_TOKEN)
-
+application = Application.builder().token(TELEGRAM_TOKEN).build()
 # Fonction pour récupérer les nouveaux meme coins
 def get_new_meme_coins():
     url = f"https://api.etherscan.io/api?module=account&action=txlist&address=0x...&apikey={ETHERSCAN_API_KEY}"
@@ -67,9 +67,12 @@ async def alerts(update: Update, context: CallbackContext):
 # Commande /copytrade pour activer la copie des transactions des whales
 async def copytrade(update: Update, context: CallbackContext):
     await update.message.reply_text("🤖 Copie automatique des transactions des whales activée !")
-#lit les msg
-def handle_channel_messages(update: Update, context: CallbackContext):
-    update.message.reply_text("Message reçu dans le channel ! 🚀")
+# Fonction pour gérer les messages du channel
+async def handle_channel_messages(update: Update, context: CallbackContext):
+    await update.message.reply_text("Message reçu dans le channel ! 🚀")
+
+# Ajout du handler pour écouter les messages dans le channel
+application.add_handler(MessageHandler(filters.Chat(int(BOT_CHAT_ID)), handle_channel_messages))
 
 application.add_handler(MessageHandler(filters.Chat(BOT_CHAT_ID), handle_channel_messages))
 # Fonction principale
